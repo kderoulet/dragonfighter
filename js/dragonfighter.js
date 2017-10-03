@@ -16,8 +16,16 @@ function nextTurn() {
 if (dragonAction === "inhale") {
     breatheFire();
     dragonAction = "breatheFire";
-} else randomAction();}
+} else randomAction(0, );}
 
+function randomAction(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;}
+
+
+    //Do we want an array of objects rather than a big ol' object?
+    
 var dragonMoves = {
     inhale: function() {
         dragonAction = "inhale";
@@ -35,9 +43,12 @@ var dragonMoves = {
     },
     breatheFire: function() {
         dragonAction = "breatheFire";
-        if (humanAction === "roll") {
+        if (humanAction === "endureFlame") {
             console.log("You dodged the dragon's fire!");
             }
+        else if (humanAction === "teleport") {
+            console.log("The dragon breathes fire, but he misses")
+        }
         else {
             humanHealth = humanHealth - fireDamage;
             console.log("The dragon breathes fire, burning you for " + fireDamage + " damage. You have " + humanHealth + " remaining.")}},
