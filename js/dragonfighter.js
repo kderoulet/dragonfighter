@@ -25,10 +25,10 @@ function init() {
 function initVarEasy() {
     dragonAction = "";
     humanAction = "";
-    dragonHealth = 100;
+    dragonHealth = 120;
     fireDamage = 60;
-    clawDamage = 8;
-    biteDamage = 20;
+    clawDamage = 12;
+    biteDamage = 30;
     tailSwipeDamage = 10;
     humanHealth = 100;
     magicMissileDamage = 5;
@@ -43,10 +43,10 @@ function initVarEasy() {
 function initVarHard() {
     dragonAction = "";
     humanAction = "";
-    dragonHealth = 100;
+    dragonHealth = 150;
     fireDamage = 200;
     clawDamage = 20;
-    biteDamage = 30;
+    biteDamage = 40;
     tailSwipeDamage = 20;
     humanHealth = 100;
     magicMissileDamage = 5;
@@ -164,6 +164,11 @@ $('.input').on('submit', function(evt) {
             render();
         }
         }
+    else if (page === 4) {
+        if ($('input').val() == 1)
+            page = 1
+            render();
+    }
     else if (page === 5) {
         if ($('input').val() == 1) {
             page = 1;
@@ -177,6 +182,10 @@ $('.input').on('submit', function(evt) {
 // dragon actions
 function reverseTime() {
     timeCounter += 1
+    if (timeCounter > 7) {
+        bite();
+        return
+    }
     if (dragonAction === "claw") {
         dragonAction = "reverseClaw"
         humanHealth += clawDamage
@@ -278,7 +287,7 @@ function shrinkEnemy() {
 
 function heal() {
     humanAction = 'heal';
-    randomNumber(10, 21);
+    randomNumber(5, 31);
     healAmount = temp;
     humanHealth += healAmount;
     if (humanHealth > 100) {
@@ -351,7 +360,7 @@ function setTextValues() {
             description2Text = "The dragon attempts to bite you, but you are too speedy."
         }
         else if (dragonAction === "teleportedFire") {
-            description2Text = "The dragon breathes fire, but he misses";
+            description2Text = "The dragon breathes fire, but he misses.";
         }
         else if (dragonAction === "breatheFire") {
             description2Text = "The dragon breathes fire, burning you for " + fireDamage + " damage."
@@ -360,7 +369,7 @@ function setTextValues() {
             description2Text = 'Confused, the dragon looks around, trying to figure out where you went.';
         }
         else if (dragonAction === "tailSwipe") {
-            description2Text = "The dragon sweeps you with his tail, knocking you over and dealing " + tailSwipeDamage + " damage to you. You have " + humanHealth + " remaining.";
+            description2Text = "The dragon sweeps you with his tail, knocking you over and dealing " + tailSwipeDamage + " damage to you.";
         }
         else if (dragonAction === "reverseTime") {
             description2Text = "The dragon seems to have brought both of you back in time. But just a little."
@@ -379,13 +388,26 @@ function setTextValues() {
     else if (page === 4) {
         statusText = 'You have killed the dragon';
         description1Text = 'With a loud thud, the dragon drops to the ground.';
-        description2Text = 'Upon your return to town, ';
-        actionText = 'You win';
+        description2Text = 'Upon your return to town, your victory is celebrated by all.';
+        actionText = 'Play again? <br> 1. Yes <br> 2. No';
 
     }
     else {
-        statusText = 'You Died';
-        descriptionText = '';
+        statusText = 'Disateriffic...';
+        description1Text = 'You died.';
+        description2Text = '';
+        if (dragonAction === 'claw') {
+            description1Text = "The dragon claws at you. Like, a lot. You're definitely quite dead."
+            description2Text = "Yup. Definitely dead."
+        }
+        else if (dragonAction === 'bite') {
+            description1Text = "The dragon bites you. Like, enough to take off your head. You know what rhymes with your head?"
+            description2Text = "You're dead."
+        }
+        else if (dragonAction === 'breatheFire') {
+            description1Text = "The dragon breathes fire at you, dealing " + fireDamage + " damage to you."
+            description2Text = "Yup. You're dead. Well done, though!"
+        }
         actionText = 'Do you want to try again? <br> 1. Yes <br> 2. No';
     }
 }
