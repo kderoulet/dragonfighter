@@ -45,8 +45,8 @@ function initVarHard() {
     humanAction = "";
     dragonHealth = 150;
     fireDamage = 200;
-    clawDamage = 20;
-    biteDamage = 40;
+    clawDamage = 15;
+    biteDamage = 35;
     tailSwipeDamage = 20;
     humanHealth = 100;
     magicMissileDamage = 5;
@@ -310,14 +310,14 @@ function renderPage() {
 
 function setTextValues() {
     if (page === 1) {
-        statusText = 'Welcome to Game';
-        description1Text = '';
-        description2Text = '';
+        statusText = 'Welcome to Dragon Fighter';
+        description1Text = 'A mighty dragon has set up shop in a nearby cave. It has been having a great time chewing on the local peasants.';
+        description2Text = 'Lady Bethany has asked you, the great wizard Wizarlio, to come out of retirement to save the village.';
         actionText = 'How difficult do you want this? <br> 1. Easy <br> 2. Hard'
     }
     else if (page === 2) {
         statusText = "Your Health: " + humanHealth;
-        description1Text = 'You approach a mighty dragon in his cave. He appears to be alert and ready to fight.'
+        description1Text = 'You approach the dragon in its cave. It appears to be alert and ready to fight.'
         description2Text = 'You have a bunch of spells, but it has been a while since your last fight. Hopefully they all still work.'
         actionText = 'What spell are you going to use? <br> 1. Magic Missile <br> 2. Lightning Strike <br> 3. Shrink Enemy <br> 4. Heal <br> 5. Teleport'
     }
@@ -375,21 +375,21 @@ function setTextValues() {
             description2Text = "The dragon seems to have brought both of you back in time. But just a little."
         }
         else if (dragonAction === "reverseClaw") {
-            description2Text = "The dragon reverses time, and you see the claw marks which the dragon left on you disappear. The dragon looks healthier, too."
+            description2Text = "Somehow, the dragon reverses time a little bit, and you see the claw marks which the dragon left on you disappear. The dragon looks healthier, too."
         }
         else if (dragonAction === "reverseBite") {
-            description2Text = "the dragon reverses time, and the bite marks which it left on you are gone!"
+            description2Text = "Somehow, the dragon seems to reverse time, and the bite marks which it left on you are gone!"
         }
         else if (dragonAction === "reverseFire") {
-            description2Text = "the dragon reverses time, and you feel noticeably less charred."
+            description2Text = "Somehow, the dragon reverses time, and you feel noticeably less charred."
         }
     }
 
     else if (page === 4) {
         statusText = 'You have killed the dragon';
         description1Text = 'With a loud thud, the dragon drops to the ground.';
-        description2Text = 'Upon your return to town, your victory is celebrated by all.';
-        actionText = 'Play again? <br> 1. Yes <br> 2. No';
+        description2Text = 'Upon your return to town, your victory is celebrated by all. Lady Bethany thanks you, Wizarlio, for keeping the town safe. Surely your name will go down in the history books for this one.';
+        actionText = 'Play again? <br> 1. Yes <br>';
 
     }
     else {
@@ -408,7 +408,7 @@ function setTextValues() {
             description1Text = "The dragon breathes fire at you, dealing " + fireDamage + " damage to you."
             description2Text = "Yup. You're dead. Well done, though!"
         }
-        actionText = 'Do you want to try again? <br> 1. Yes <br> 2. No';
+        actionText = 'Do you want to try again? <br> 1. Yes <br>'
     }
 }
 
